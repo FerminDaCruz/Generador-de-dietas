@@ -42,16 +42,16 @@ if st.button("Generar Plan de Dieta"):
 
     # Llamar a la API de OpenAI
     try:
-        response = openai.Completion.create(
-            model="gpt-3.5-turbo-instruct",
-            prompt=prompt,
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": prompt}],
             max_tokens=1000,
             n=1,
             stop=None,
             temperature=0.7,
         )
 
-        plan_de_dieta = response.choices[0].text.strip()
+        plan_de_dieta = response.choices[0].message.content.strip()
         st.subheader("Plan de Dieta:")
         st.write(plan_de_dieta)
 
